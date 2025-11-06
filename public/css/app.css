@@ -1,0 +1,283 @@
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background-color: rgb(255, 253, 255);
+    color: #0c0c0c;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* === Layout umum === */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    padding: 2em 1.5em;
+    margin-top: 65px;
+    text-align: center;
+    max-width: 1400px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* === Navbar === */
+header {
+    background: linear-gradient(135deg, #05cccc 0%, #0953c2 100%);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    background: linear-gradient(135deg, #07a4ec 0%, #1501c9 100%);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px; /* sedikit lebih kecil */
+    position: relative;
+    z-index: 1000;
+}
+
+/* === Logo === */
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.4em;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.logo a:hover {
+    transform: scale(1.05);
+    color: #dbeafe;
+}
+
+/* === Menu Desktop === */
+#nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    margin: 0;
+    height: 100%;
+}
+
+#nav-links li {
+    position: relative;
+    height: 100%;
+}
+
+#nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95em;
+    padding: 0.6em 1.2em;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#nav-links li a:hover {
+    background-color: rgba(165, 180, 252, 0.15);
+    color: #dbeafe;
+}
+
+/* === Dropdown klasik === */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgb(8, 85, 228);
+    min-width: 180px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    z-index: 2000;
+}
+
+.dropdown-menu li {
+    width: 100%;
+}
+
+.dropdown-menu li a {
+    color: #000000;
+    font-weight: 500;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f2f4f7;
+    color: #0953c2;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* === Tombol Hamburger === */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 0.4s ease;
+}
+
+.footer {
+    background: linear-gradient(to right, #0d0d0e, #909397);
+    color: white;
+    text-align: center;
+    padding: 4px 0; 
+    font-weight: 500;
+    font-size: 0.9rem; 
+    margin-top: auto;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px; /* Lebih rapat */
+  }
+  
+  .footer .social-icons {
+    display: flex;
+    gap: 14px; /* Lebih rapat antar ikon */
+    justify-content: center;
+  }
+  
+  .social-link {
+    font-size: 1rem; /* Dikecilin dikit */
+    transition: all 0.3s ease;
+  }
+  
+  .instagram {
+    color: #E4405F;
+  }
+  
+  .whatsapp {
+    color: #25D366;
+  }
+  
+  .facebook {
+    color: #1877F2;
+  }
+  
+  .social-link:hover {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 1.2rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    #nav-links {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100vh;
+        background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+        padding: 5em 0 2em;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+    }
+
+    #nav-links.active {
+        transform: translateX(0);
+    }
+
+    #nav-links li a {
+        display: block;
+        padding: 1em 1.5em;
+        border-radius: 0;
+        border-left: 4px solid transparent;
+    }
+
+    #nav-links li a:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-left-color: #a5b4fc;
+    }
+
+    .dropdown-menu {
+        position: static;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .dropdown-menu li a {
+        color: #fdf8f8;
+        padding-left: 2em;
+    }
+
+    .dropdown-menu li a:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+}
