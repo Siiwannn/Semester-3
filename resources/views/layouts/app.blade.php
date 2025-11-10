@@ -3,6 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <title>Rekayasa-Web</title>
+    <link rel="icon" href="{{ asset('assets/image/upam.png') }}" type="image/png" width="64" height="64">
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.5-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css?v=1') }}">
@@ -19,6 +20,11 @@
     @include('partials.header')
 
     {{-- Konten --}}
+    @if (session('success'))
+    <div class="alert success">
+        {{ session('success') }}
+    </div>
+    @endif
     
     <main>
         @yield('content')

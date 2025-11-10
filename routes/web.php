@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\FakultasController;
+use App\Http\Controllers\AuthController;
 
-
-// Halaman Utama
+// ===========================
+// Halaman Umum
+// ===========================
 Route::get('/', function () {
     return view('pages.home');
 })->name('home');
@@ -19,35 +21,51 @@ Route::get('/contact', function () {
 })->name('contact');
 
 
+// ===========================
 // Halaman Mahasiswa (User)
 // ===========================
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
 Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show'])->name('mahasiswa.detail');
 
 
+// ===========================
 // Halaman Fakultas (User)
 // ===========================
 Route::get('/fakultas', [FakultasController::class, 'index'])->name('fakultas.index');
 Route::get('/fakultas/{id}', [FakultasController::class, 'show'])->name('fakultas.detail');
 
 
-// Admin - CRUD Mahasiswa
 // ===========================
+// Autentikasi (Login / Register / Logout)
+// ===========================
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
-// Halaman utama admin CRUD Mahasiswa
-Route::get('/admin/mahasiswa', [MahasiswaController::class, 'adminIndex'])->name('admin.mahasiswa.index');
+// Register
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
-// Data untuk DataTables (JSON)
-Route::get('/admin/mahasiswa/data', [MahasiswaController::class, 'getData'])->name('admin.mahasiswa.data');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Simpan data baru
-Route::post('/admin/mahasiswa/store', [MahasiswaController::class, 'store'])->name('admin.mahasiswa.store');
 
-// Ambil data untuk edit
-Route::get('/admin/mahasiswa/edit/{id}', [MahasiswaController::class, 'edit'])->name('admin.mahasiswa.edit');
+// ===========================
+// Admin - CRUD Mahasiswa (hanya untuk yang login)
+// ===========================
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/mahasiswa', [MahasiswaController::class, 'adminIndex'])->name('admin.mahasiswa.index');
 
-// Update data mahasiswa
-Route::post('/admin/mahasiswa/update/{id}', [MahasiswaController::class, 'update'])->name('admin.mahasiswa.update');
+    // Data untuk DataTables (JSON)
+    Route::get('/mahasiswa/data', [MahasiswaController::class, 'getData'])->name('admin.mahasiswa.data');
 
-// Hapus data mahasiswa
-Route::delete('/admin/mahasiswa/delete/{id}', [MahasiswaController::class, 'destroy'])->name('admin.mahasiswa.delete');
+    // Simpan data baru
+    Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('admin.mahasiswa.store');
+
+    // Ambil data untuk edit
+    Route::get('/mahasiswa/edit/{id}', [MahasiswaController::class, 'edit'])->name('admin.mahasiswa.edit');
+
+    // Update data mahasiswa
+    Route::post('/mahasiswa/update/{id}', [MahasiswaController::class, 'update'])->name('admin.mahasiswa.update');
+
+    // Hapus data mahasiswa
+    Route::delete('/mahasiswa/delete/{id}', [MahasiswaController::class, 'destroy'])->name('admin.mahasiswa.delete');
+});
