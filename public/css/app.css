@@ -170,6 +170,9 @@ main {
   gap: 0.3rem;
   transition: color 0.3s ease;
 }
+.dropdown-toggle::after {
+  content: none !important;
+}
 
 .dropdown-toggle:hover {
   color: #333333;
