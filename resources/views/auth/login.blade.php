@@ -21,23 +21,17 @@
             height: 100vh;
             display: flex;
             justify-content: center;
+            background-image: url("{{ asset('assets/image/unpam.jpg')}}");
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
             align-items: center;
             font-family: 'Poppins', sans-serif;
             position: relative;
             overflow: hidden;
         }
 
-        /* === VIDEO BACKGROUND === */
-        .bg-video {
-            position: fixed;
-            top: -40px; /* Geser dikit biar bagian bawah ke-crop */
-            left: 0;
-            width: 100%;
-            height: 120%; /* Lebihin dikit biar gak ada ruang kosong */
-            object-fit: cover;
-            z-index: -1;
-            filter: brightness(60%); /* Biar form login keliatan jelas */
-        }
+     
 
         /* === LOGIN CARD === */
         .login-card {
@@ -52,12 +46,12 @@
             color: #fff; /* teks putih biar kontras */
         }            
        .card-header h3 {
-            color: #fff;
+            color: #131212;
             font-weight: 600;
         }
 
         .form-label {
-            color: #f1f1f1;
+            color: #383636;
             font-weight: 500;
         }
 
@@ -94,12 +88,6 @@
 </head>
 
 <body>
-    <!-- Video Background -->
-    <video autoplay muted loop class="bg-video">
-        <source src="{{ asset('assets/image/bg.mp4') }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
     <!-- Login Card -->
     <div class="login-card">
         <div class="card-header text-center mb-3">
