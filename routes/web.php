@@ -68,4 +68,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // Hapus data mahasiswa
     Route::delete('/mahasiswa/delete/{id}', [MahasiswaController::class, 'destroy'])->name('admin.mahasiswa.delete');
+
+    // Export Ke Pdf
+     Route::get('/mahasiswa/pdf', [MahasiswaController::class, 'reportPdf'])->name('mahasiswa.all.pdf');
 });

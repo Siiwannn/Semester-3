@@ -5,7 +5,8 @@
 
 <div class="container py-4">
     <h3 class="mb-4">CRUD Data Mahasiswa</h3>
-    <button class="btn btn-primary mb-3 float-start" id="btnAdd">Tambah Data</button>
+    <button class="btn btn-primary mb-3 float-start me-3" id="btnAdd">+Tambah Data</button>
+    <a href="{{route ('mahasiswa.all.pdf')}}" class="btn btn-danger mb-3 float-start">Report Pdf</a>
     <table class="table table-bordered table-striped" id="mahasiswaTable">
     <thead class="table-dark">
         <tr>

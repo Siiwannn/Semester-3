@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class MahasiswaController extends Controller
 {
@@ -122,5 +124,26 @@ class MahasiswaController extends Controller
         $mahasiswa->delete();
 
         return response()->json(['success' => true, 'message' => 'Data berhasil dihapus']);
+    }
+
+    public function reportPdf()
+    {
+        $mahasiswas = Mahasiswa::all();
+
+        $options = new Options();
+        $options->set('isRemoteEnabled', TRUE);
+        $options->set('isHtml5ParseEnabled',TRUE);
+        $options->set('chroot',realpath(base_path()));
+        $options->set('defaultFont','Arial');
+
+        $dompdf = new Dompdf($options);
+        $html = view('admin.report-pdf', compact('mahasiswas'))->render();
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4','landscape');
+        $dompdf->render();
+
+        return $dompdf->stream('data_mahasiswa_all.pdf');
+
     }
 }
