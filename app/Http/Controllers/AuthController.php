@@ -53,7 +53,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        // ⬇️ Langsung diarahkan ke halaman login, tanpa auto login
+       
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
