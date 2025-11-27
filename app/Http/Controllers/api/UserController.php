@@ -14,95 +14,107 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-
         return response()->json([
             'success' => true,
+            'message' =>'List Data users berhasil di tampilkan',
             'data' => $users
-        ]);
+        ],200);
     }
 
-    // GET USER BY ID
+    // STORE USER
+    public function store(Request $request)
+    {
+        $validateData = $request->validate([
+            'name'=> 'required|string|max:255',   
+            'email'=> 'required|string|email|max:255|unique:users',   
+            'password'=> 'required|string|min:8',   
+            'phone'=> 'nullable',   
+            'address'=> 'nullable',   
+            'role'=> 'nullable',   
+        ]);
+
+        $validateData['password'] = Hash::make($validateData['password']);
+
+        $user = User::create($validateData);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'User berhasil di tambahkan',
+            'data' => $user
+        ],201);
+    }
+
+    // SHOW USER
     public function show($id)
     {
-        $user = User::find($id);
+        try {
+            $user = User::findOrFail($id);
+            return response()->json([
+                'status' => true,
+                'message'=> 'Detail Data user berhasil ditampilkan',
+                'data' => $user
+            ],200);
 
-        if (!$user) {
+        } catch (\Exception $e){
             return response()->json([
                 'success' => false,
                 'message' => 'User tidak ditemukan'
             ], 404);
         }
-
-        return response()->json([
-            'success' => true,
-            'data' => $user
-        ]);
     }
 
     // UPDATE USER
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        try{
+            $user = User::findOrFail($id);
 
-        if (!$user) {
+            $validatedData = $request->validate([
+                'name' => 'nullable|string|max:255',
+                'email' => 'nullable|string|email|max:255|unique:users,email,' .$id,
+                'password'=> 'nullable|string|min:8',
+                'phone'=> 'nullable',
+                'address'=> 'nullable',
+                'role'=> 'nullable',
+            ]);
+
+            if (isset($validatedData['password'])){
+                $validatedData['password'] = Hash::make($validatedData['password']);
+            }
+
+            $user->update($validatedData);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User berhasil diperbarui',
+                'data' => $user
+            ], 200);
+
+        } catch (\Exception $e){
             return response()->json([
                 'success' => false,
                 'message' => 'User tidak ditemukan'
             ], 404);
         }
-
-        $validatedData = Validator::make($request->all(), [
-            'name' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8',
-            'role' => 'nullable|string'
-        ]);
-
-        if ($validatedData->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validatedData->errors()
-            ], 422);
-        }
-
-        // Update data
-        $user->name = $request->name ?? $user->name;
-        $user->email = $request->email ?? $user->email;
-
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
-        }
-
-        if ($request->role) {
-            $user->role = $request->role;
-        }
-
-        $user->save();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'User berhasil diupdate',
-            'data' => $user
-        ]);
     }
 
     // DELETE USER
     public function destroy($id)
     {
-        $user = User::find($id);
+        try{
+            $user = User::findOrFail($id);
+            $user->delete();
 
-        if (!$user) {
+            return response()->json([
+                'status' => true,
+                'message' => 'User berhasil dihapus',
+            ],200);
+
+        } catch (\Exception $e){
             return response()->json([
                 'success' => false,
                 'message' => 'User tidak ditemukan'
             ], 404);
         }
-
-        $user->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'User berhasil dihapus'
-        ]);
     }
 }
