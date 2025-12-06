@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container py-4">
-    <h3 class="mb-4">CRUD Data Mahasiswa</h3>
+    <h3 class="mb-4">CRUD MahasiswaData </h3>
     <button class="btn btn-primary mb-3 float-start me-3" id="btnAdd">+Tambah Data</button>
     <a href="{{route ('mahasiswa.all.pdf')}}" class="btn btn-danger mb-3 float-start">Report Pdf</a>
     <table class="table table-bordered table-striped" id="mahasiswaTable">
@@ -26,67 +26,66 @@
 <!-- Edit -->
 <div class="modal fade" id="mahasiswaModal" tabindex="-1" aria-labelledby="mahasiswaModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <form id="formMahasiswa" enctype="multipart/form-data">
-        @csrf
-        <input type="hidden" name="id" id="id">    <div class="modal-header">
-      <h5 class="modal-title text-center w-100" id="mahasiswaModalLabel">Tambah Mahasiswa</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-    </div>
-
-    <div class="modal-body text-start">
-      <div class="mb-2">
-        <label>Nim</label>
-        <input type="text" name="nim" id="nim" class="form-control" required>
+      <div class="modal-content">
+        <form id="formMahasiswa" enctype="multipart/form-data">
+          @csrf
+          <input type="hidden" name="id" id="id">    <div class="modal-header">
+        <h5 class="modal-title text-center w-100" id="mahasiswaModalLabel">Tambah Mahasiswa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
-      <div class="mb-2">
-        <label>Nama</label>
-        <input type="text" name="nama" id="nama" class="form-control" required>
+      <div class="modal-body text-start">
+        <div class="mb-2">
+          <label>Nim</label>
+          <input type="text" name="nim" id="nim" class="form-control" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Nama</label>
+          <input type="text" name="nama" id="nama" class="form-control" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Prodi</label>
+          <select name="prodi" id="prodi" class="form-select" required>
+            <option value="">-- Pilih Program Studi --</option>
+            <option value="Teknik Informatika">Teknik Informatika</option>
+            <option value="Sistem Informasi">Sistem Informasi</option>
+            <option value="Teknik Komputer">Teknik Komputer</option>
+            <option value="Manajemen Informatika">Manajemen Informatika</option>
+          </select>
+        </div>
+
+        <div class="mb-2">
+          <label>Angkatan</label>
+          <input type="number" name="angkatan" id="angkatan" class="form-control" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Tgl Lahir</label>
+          <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control" required>
+        </div>
+
+        <div class="mb-2">
+          <label>Nomor Telepon</label>
+          <input type="text" name="no_hp" id="no_hp" class="form-control">
+        </div>
+
+        <div class="mb-2">
+          <label>Gambar</label>
+          <input type="file" name="gambar" id="gambar" class="form-control">
+          <small id="previewArea" class="d-block mt-2"></small>
+        </div>
       </div>
 
-      <div class="mb-2">
-        <label>Prodi</label>
-        <select name="prodi" id="prodi" class="form-select" required>
-          <option value="">-- Pilih Program Studi --</option>
-          <option value="Teknik Informatika">Teknik Informatika</option>
-          <option value="Sistem Informasi">Sistem Informasi</option>
-          <option value="Teknik Komputer">Teknik Komputer</option>
-          <option value="Manajemen Informatika">Manajemen Informatika</option>
-        </select>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Simpan</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
       </div>
-
-      <div class="mb-2">
-        <label>Angkatan</label>
-        <input type="number" name="angkatan" id="angkatan" class="form-control" required>
-      </div>
-
-      <div class="mb-2">
-        <label>Tgl Lahir</label>
-        <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control" required>
-      </div>
-
-      <div class="mb-2">
-        <label>Nomor Telepon</label>
-        <input type="text" name="no_hp" id="no_hp" class="form-control">
-      </div>
-
-      <div class="mb-2">
-        <label>Gambar</label>
-        <input type="file" name="gambar" id="gambar" class="form-control">
-        <small id="previewArea" class="d-block mt-2"></small>
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-success">Simpan</button>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-    </div>
-  </form>
+   </form>
+ </div>
 </div>
 
-  </div>
-</div>
 
 {{-- Toastr & DataTables --}}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">

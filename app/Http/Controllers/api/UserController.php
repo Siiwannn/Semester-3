@@ -13,10 +13,15 @@ class UserController extends Controller
     // GET ALL USERS
     public function index()
     {
+        return view('admin.user');
+    }
+
+    public function getData()
+    {
         $users = User::all();
         return response()->json([
             'success' => true,
-            'message' =>'List Data users berhasil di tampilkan',
+            'message' =>'List data users berhasil di tampilkan',
             'data' => $users
         ],200);
     }

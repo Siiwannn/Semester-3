@@ -438,3 +438,31 @@ main {
     padding: 2.5em 2em;
   }
 }
+
+.footer {
+  background: #f1f1f1;
+  padding: 3px 0;        /* dari 20px → 8px biar lebih tipis */
+  text-align: center;
+  margin-top: 30px;
+}
+
+.footer-content p {
+  color: #555;
+  margin: 2px 0 0;       /* rapetin */
+  font-size: 13px;
+}
+
+.social-icons {
+  margin-bottom: 4px;    /* dari 10px → 4px */
+}
+
+.social-link {
+  font-size: 18px;       /* kecilin icon */
+  margin: 0 6px;
+  color: #555;
+  transition: 0.3s;
+}
+
+.social-link:hover {
+  color: #0d6efd;
+}

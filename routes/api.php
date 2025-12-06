@@ -10,5 +10,6 @@ Route::post('/register', [AuthApiController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class);
+    Route::get('/users/data',[UserController::class,'getData'])->name('api.users.data');
     Route::post('/logout', [AuthApiController::class, 'logout']);
 });

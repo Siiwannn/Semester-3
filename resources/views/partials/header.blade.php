@@ -49,6 +49,9 @@
             <li>
               <a href="/admin/mahasiswa">CRUD Mahasiswa</a>
             </li>
+            <li>
+              <a href="/admin/users">CRUD User</a>
+            </li>
             @endauth
           </ul>
         </li>

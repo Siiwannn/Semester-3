@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\FakultasController;
@@ -71,4 +71,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     // Export Ke Pdf
      Route::get('/mahasiswa/pdf', [MahasiswaController::class, 'reportPdf'])->name('mahasiswa.all.pdf');
+
+     Route::get('/users', [UserController::class, 'index'])->name('admin.user');
+
+     // CRUD User
+     Route::get('/user/data', [UserController::class, 'data'])->name('admin.user.data');
+     Route::post('/user/store', [UserController::class, 'store'])->name('admin.user.store');
+     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+     Route::post('/user/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
+     Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('admin.user.delete');
 });
